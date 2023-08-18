@@ -2,6 +2,7 @@ import { GoogleSpreadsheetRow } from 'google-spreadsheet'
 
 import type { PartOfSpeech, RowData, WordInformation } from '../types.js'
 import { fetchWordInformation } from './word-information-fetcher.service.js'
+import { retryWithDelay } from '../utils.js'
 
 export async function processRow(row: GoogleSpreadsheetRow<RowData>) {
   if (!row) return
@@ -38,11 +39,18 @@ function getRowData(row: GoogleSpreadsheetRow<RowData>) {
   }
 }
 
-async function insertValues(row: GoogleSpreadsheetRow<Partial<RowData>>, data: WordInformation) {
+async function insertValues(
+  row: GoogleSpreadsheetRow<Partial<RowData>>,
+  { pronunciation, definition, example }: WordInformation,
+) {
   row.assign({
-    Pronunciation: data.pronunciation,
-    Definition: data.definition,
+    Pronunciation: pronunciation,
+    Definition: definition,
     'Is fetched': 'TRUE',
+    ...(example && { Example: example }),
   })
-  await row.save()
+
+  await retryWithDelay({
+    fn: () => row.save(),
+  })
 }

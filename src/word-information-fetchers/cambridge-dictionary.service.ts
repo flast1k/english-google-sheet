@@ -1,6 +1,7 @@
 import { HTMLElement, parse } from 'node-html-parser'
 
 import type { PartOfSpeech, WordInformationFetcher } from '../types.js'
+import { fetchHtml } from '../services/client.service.js'
 
 const BASE_URL = 'https://dictionary.cambridge.org/dictionary/english/'
 
@@ -23,8 +24,7 @@ export class CambridgeDictionaryService implements WordInformationFetcher {
       partOfSpeech: PartOfSpeech
     },
   ) {
-    const result = await fetch(`${BASE_URL}${word.toLowerCase()}`)
-    const body = await result.text()
+    const body = await fetchHtml(`${BASE_URL}${word.toLowerCase()}`)
 
     return this.parse(body, additionalData?.partOfSpeech)
   }
@@ -37,12 +37,14 @@ export class CambridgeDictionaryService implements WordInformationFetcher {
 
     const pronunciation = this.getPronunciation(definitionBlock)
     const definition = this.getDefinition(definitionBlock)
+    const example = this.getExample(definitionBlock)
 
     if (!pronunciation || !definition) return null
 
     return {
       pronunciation,
       definition,
+      example,
     }
   }
 
@@ -66,6 +68,10 @@ export class CambridgeDictionaryService implements WordInformationFetcher {
 
   private getPronunciation(definitionElement: HTMLElement) {
     return definitionElement.querySelector('.us.dpron-i > .pron.dpron')?.text.trim()
+  }
+
+  private getExample(definitionElement: HTMLElement) {
+    return definitionElement.querySelectorAll('.examp.dexamp')?.[0]?.text.trim()
   }
 
   private getDefinition(definitionElement: HTMLElement) {

@@ -1,6 +1,7 @@
 import { parse, HTMLElement } from 'node-html-parser'
 
 import type { WordInformationFetcher, PartOfSpeech } from '../types.js'
+import { fetchHtml } from '../services/client.service.js'
 
 const BASE_URL = 'https://www.oxfordlearnersdictionaries.com/us/definition/english/'
 
@@ -23,8 +24,7 @@ export class OxfordLearnersDictionariesService implements WordInformationFetcher
       partOfSpeech: PartOfSpeech
     },
   ) {
-    const result = await fetch(`${BASE_URL}${word.toLowerCase()}`)
-    const body = await result.text()
+    const body = await fetchHtml(`${BASE_URL}${word.toLowerCase()}`)
 
     return this.parse(body)
   }

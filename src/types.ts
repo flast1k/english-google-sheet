@@ -1,6 +1,7 @@
 export type WordInformation = {
   pronunciation: string
   definition: string
+  example?: string
 }
 
 export type RowData = {
@@ -9,6 +10,7 @@ export type RowData = {
   Definition: string
   'Part of speech'?: PartOfSpeech
   'Is fetched'?: 'TRUE'
+  Example?: string
 }
 
 export type PartOfSpeech = 'noun' | 'verb' | 'adjective' | 'adverb'

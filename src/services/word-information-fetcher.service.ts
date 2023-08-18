@@ -13,17 +13,13 @@ export async function fetchWordInformation(
   const cambridgeDictionaryService = CambridgeDictionaryService.getInstance()
   const oxfordLearnersDictionariesService = OxfordLearnersDictionariesService.getInstance()
 
-  if (additionalData?.partOfSpeech) {
-    wordInformation = await cambridgeDictionaryService.fetchWordInformation(word, additionalData)
-  } else {
+  wordInformation = await cambridgeDictionaryService.fetchWordInformation(word, additionalData)
+
+  if (!wordInformation) {
     wordInformation = await oxfordLearnersDictionariesService.fetchWordInformation(
       word,
       additionalData,
     )
-
-    if (!wordInformation) {
-      wordInformation = await cambridgeDictionaryService.fetchWordInformation(word, additionalData)
-    }
   }
 
   return wordInformation
