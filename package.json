@@ -6,7 +6,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "pnpm run build && cross-env NODE_ENV=local node dist/index.js"
+    "start:fill-words-sheet": "pnpm run build && cross-env NODE_ENV=local node dist/fill-words-sheet.js",
+    "start:create-anki-cards": "pnpm run build && cross-env NODE_ENV=local node dist/create-anki-cards.js"
   },
   "keywords": [],
   "author": "flast1k",

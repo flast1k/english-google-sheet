@@ -14,4 +14,10 @@ Requirements:
 
 # Run
 
-`pnpm run start`
+To fill words sheet execute:
+
+`pnpm run start:fill-words-sheet`
+
+To create anki cards execute:
+
+`pnpm run start:create-anki-cards`

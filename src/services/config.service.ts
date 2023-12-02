@@ -15,3 +15,11 @@ export function getGoogleTokenPath() {
 export function getGoogleSheetId() {
   return process.env.GOOGLE_SHEET_ID
 }
+
+export function getAnkiDeckId() {
+  return process.env.ANKI_DECK_ID
+}
+
+export function getAnkiAuthorizationToken() {
+  return process.env.ANKI_AUTHORIZATION_TOKEN
+}
