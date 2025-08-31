@@ -13,20 +13,21 @@
   "author": "flast1k",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.5.0",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.3.1",
-    "prettier": "^3.0.2",
-    "typescript": "^5.1.6"
+    "@types/node": "24.3.0",
+    "cross-env": "10.0.0",
+    "dotenv": "17.2.1",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2"
   },
   "dependencies": {
-    "@google-cloud/local-auth": "^3.0.0",
-    "google-spreadsheet": "^4.0.2",
-    "googleapis": "^126.0.0",
-    "node-html-parser": "^6.1.6"
+    "@google-cloud/local-auth": "3.0.1",
+    "google-spreadsheet": "5.0.2",
+    "googleapis": "159.0.0",
+    "node-html-parser": "7.0.1"
   },
   "engines": {
-    "pnpm": ">=8.6.9",
-    "node": ">=18.0.0"
-  }
+    "pnpm": ">=10.0.0",
+    "node": ">=22.14.0"
+  },
+  "packageManager": "pnpm@10.15.0"
 }
